@@ -17,10 +17,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.e.simampuscrud.Buku.Buku;
-import com.e.simampuscrud.Buku.CursorAdapterBuku;
-import com.e.simampuscrud.Buku.DBHelperBuku;
-import com.e.simampuscrud.Buku.EditBuku;
 import com.e.simampuscrud.DBHelper;
 import com.e.simampuscrud.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -112,13 +108,13 @@ public class Member extends AppCompatActivity implements AdapterView.OnItemClick
                         TvAlamat = (TextView)dialogView.findViewById(R.id.tv_Alamat);
                         TvNoTelp = (TextView)dialogView.findViewById(R.id.tv_No_Telepon);
 
-                        TvKode.setText("Kode Member                   : " + cur.getString(cur.getColumnIndex(DBHelper.COLUMN_11)));
-                        TvNama.setText("Nama                  : " + cur.getString(cur.getColumnIndex(DBHelper.COLUMN_12)));
-                        TvTempatLahir.setText("Tempat Lahir                         : " + cur.getString(cur.getColumnIndex(DBHelper.COLUMN_13)));
-                        TvTglLahir.setText("Tanggal Lahir                       : " + cur.getString(cur.getColumnIndex(DBHelper.COLUMN_14)));
-                        TvJenisKelamin.setText("Jenis kelamin                : " + cur.getString(cur.getColumnIndex(DBHelper.COLUMN_15)));
-                        TvAlamat.setText("Alamat        : " + cur.getString(cur.getColumnIndex(DBHelper.COLUMN_16)));
-                        TvNoTelp.setText("No Telepon                      : " + cur.getString(cur.getColumnIndex(DBHelper.COLUMN_17)));
+                        TvKode.setText("Kode Member    : " + cur.getString(cur.getColumnIndex(DBHelper.COLUMN_12)));
+                        TvNama.setText("Nama                  : " + cur.getString(cur.getColumnIndex(DBHelper.COLUMN_13)));
+                        TvTempatLahir.setText("Tempat Lahir     : " + cur.getString(cur.getColumnIndex(DBHelper.COLUMN_14)));
+                        TvTglLahir.setText("Tanggal Lahir     : " + cur.getString(cur.getColumnIndex(DBHelper.COLUMN_15)));
+                        TvJenisKelamin.setText("Jenis kelamin    : " + cur.getString(cur.getColumnIndex(DBHelper.COLUMN_16)));
+                        TvAlamat.setText("Alamat                : " + cur.getString(cur.getColumnIndex(DBHelper.COLUMN_17)));
+                        TvNoTelp.setText("No Telepon        : " + cur.getString(cur.getColumnIndex(DBHelper.COLUMN_18)));
 
                         viewData.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override
@@ -131,7 +127,7 @@ public class Member extends AppCompatActivity implements AdapterView.OnItemClick
                 switch (which){
                     case 1:
                         Intent iddata = new Intent(Member.this, EditMember.class);
-                        iddata.putExtra(DBHelperBuku.COLUMN_4, id);
+                        iddata.putExtra(DBHelper.COLUMN_11, id);
                         startActivity(iddata);
                 }
                 switch (which){

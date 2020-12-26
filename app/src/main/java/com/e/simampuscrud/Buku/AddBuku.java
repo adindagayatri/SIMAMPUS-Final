@@ -1,7 +1,5 @@
 package com.e.simampuscrud.Buku;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.DatePickerDialog;
 import android.content.ContentValues;
 import android.os.Bundle;
@@ -13,6 +11,9 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.e.simampuscrud.DBHelper;
 import com.e.simampuscrud.R;
 
 import java.text.SimpleDateFormat;
@@ -21,7 +22,7 @@ import java.util.Locale;
 
 public class AddBuku extends AppCompatActivity {
 
-    DBHelperBuku helper;
+    DBHelper helper;
     EditText TxKodeBuku, TxJudulBuku, TxPenulis, TxPenerbit, TxTahunTerbit, TxJumlahHalaman, TxRakBuku, TxTanggalMasukBuku;
     Spinner SpKategori;
     long id;
@@ -33,9 +34,9 @@ public class AddBuku extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_buku);
 
-        helper = new DBHelperBuku(this);
+        helper = new DBHelper(this);
 
-        id = getIntent().getLongExtra(DBHelperBuku.COLUMN_4, 0);
+        id = getIntent().getLongExtra(DBHelper.COLUMN_1, 0);
 
         TxKodeBuku = (EditText)findViewById(R.id.txKode_buku_Add);
         TxJudulBuku = (EditText)findViewById(R.id.txJudul_Buku_Add);
@@ -92,15 +93,15 @@ public class AddBuku extends AppCompatActivity {
                 String kategori_buku = SpKategori.getSelectedItem().toString().trim();
 
                 ContentValues values = new ContentValues();
-                values.put(DBHelperBuku.COLUMN_5, kode_buku);
-                values.put(DBHelperBuku.COLUMN_6, judul_buku);
-                values.put(DBHelperBuku.COLUMN_7, penulis_buku);
-                values.put(DBHelperBuku.COLUMN_8, penerbit_buku);
-                values.put(DBHelperBuku.COLUMN_9, tahun_terbit);
-                values.put(DBHelperBuku.COLUMN_10, jumlah_halaman);
-                values.put(DBHelperBuku.COLUMN_11, rak_buku);
-                values.put(DBHelperBuku.COLUMN_12, kategori_buku);
-                values.put(DBHelperBuku.COLUMN_13, tgl_masuk_buku);
+                values.put(DBHelper.COLUMN_2, kode_buku);
+                values.put(DBHelper.COLUMN_3, judul_buku);
+                values.put(DBHelper.COLUMN_4, penulis_buku);
+                values.put(DBHelper.COLUMN_5, penerbit_buku);
+                values.put(DBHelper.COLUMN_6, tahun_terbit);
+                values.put(DBHelper.COLUMN_7, jumlah_halaman);
+                values.put(DBHelper.COLUMN_8, rak_buku);
+                values.put(DBHelper.COLUMN_9, kategori_buku);
+                values.put(DBHelper.COLUMN_10, tgl_masuk_buku);
 
                 if (kode_buku.equals("") || judul_buku.equals("") ||
                         penulis_buku.equals("") || penerbit_buku.equals("") ||
@@ -109,7 +110,7 @@ public class AddBuku extends AppCompatActivity {
                 ){
                     Toast.makeText(AddBuku.this, "Data Buku Tidak Boleh Kosong !", Toast.LENGTH_SHORT).show();
                 }else{
-                    helper.insertData(values);
+                    helper.insertDataBuku(values);
                     Toast.makeText(AddBuku.this, "Data Buku Tersimpan !", Toast.LENGTH_SHORT).show();
                     finish();
                 }

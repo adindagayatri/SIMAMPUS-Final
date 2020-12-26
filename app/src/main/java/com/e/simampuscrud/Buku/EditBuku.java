@@ -1,8 +1,5 @@
 package com.e.simampuscrud.Buku;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.DatePickerDialog;
 import android.content.ContentValues;
 import android.content.DialogInterface;
@@ -16,6 +13,10 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.e.simampuscrud.DBHelper;
 import com.e.simampuscrud.R;
 
 import java.text.SimpleDateFormat;
@@ -24,7 +25,7 @@ import java.util.Locale;
 
 public class EditBuku extends AppCompatActivity {
 
-    DBHelperBuku helper;
+    DBHelper helper;
     EditText TxKodeBuku, TxJudulBuku, TxPenulis, TxPenerbit, TxTahunTerbit, TxJumlahHalaman, TxRakBuku, TxTanggalMasukBuku;
     Spinner SpKategori;
     long id;
@@ -36,9 +37,9 @@ public class EditBuku extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_buku);
 
-        helper = new DBHelperBuku(this);
+        helper = new DBHelper(this);
 
-        id = getIntent().getLongExtra(DBHelperBuku.COLUMN_4, 0);
+        id = getIntent().getLongExtra(DBHelper.COLUMN_1, 0);
 
         TxKodeBuku = (EditText)findViewById(R.id.txKode_Buku_Edit);
         TxJudulBuku = (EditText)findViewById(R.id.txJudul_Buku_Edit);
@@ -76,17 +77,17 @@ public class EditBuku extends AppCompatActivity {
     }
 
     private void getData(){
-        Cursor cursor = helper.oneData(id);
+        Cursor cursor = helper.oneDataBuku(id);
         if(cursor.moveToFirst()){
-            String kodeBuku = cursor.getString(cursor.getColumnIndex(DBHelperBuku.COLUMN_5));
-            String judulBuku = cursor.getString(cursor.getColumnIndex(DBHelperBuku.COLUMN_6));
-            String penulisBuku = cursor.getString(cursor.getColumnIndex(DBHelperBuku.COLUMN_7));
-            String penerbitBuku = cursor.getString(cursor.getColumnIndex(DBHelperBuku.COLUMN_8));
-            String tahunTerbit = cursor.getString(cursor.getColumnIndex(DBHelperBuku.COLUMN_9));
-            String jumlahHalaman = cursor.getString(cursor.getColumnIndex(DBHelperBuku.COLUMN_10));
-            String rakBuku = cursor.getString(cursor.getColumnIndex(DBHelperBuku.COLUMN_11));
-            String tglMasukBuku = cursor.getString(cursor.getColumnIndex(DBHelperBuku.COLUMN_13));
-            String kategoriBuku = cursor.getString(cursor.getColumnIndex(DBHelperBuku.COLUMN_12));
+            String kodeBuku = cursor.getString(cursor.getColumnIndex(DBHelper.COLUMN_2));
+            String judulBuku = cursor.getString(cursor.getColumnIndex(DBHelper.COLUMN_3));
+            String penulisBuku = cursor.getString(cursor.getColumnIndex(DBHelper.COLUMN_4));
+            String penerbitBuku = cursor.getString(cursor.getColumnIndex(DBHelper.COLUMN_5));
+            String tahunTerbit = cursor.getString(cursor.getColumnIndex(DBHelper.COLUMN_6));
+            String jumlahHalaman = cursor.getString(cursor.getColumnIndex(DBHelper.COLUMN_7));
+            String rakBuku = cursor.getString(cursor.getColumnIndex(DBHelper.COLUMN_8));
+            String tglMasukBuku = cursor.getString(cursor.getColumnIndex(DBHelper.COLUMN_10));
+            String kategoriBuku = cursor.getString(cursor.getColumnIndex(DBHelper.COLUMN_9));
 
             TxKodeBuku.setText(kodeBuku);
             TxJudulBuku.setText(judulBuku);
@@ -138,15 +139,15 @@ public class EditBuku extends AppCompatActivity {
                 String kategoriBuku = SpKategori.getSelectedItem().toString().trim();
 
                 ContentValues values = new ContentValues();
-                values.put(DBHelperBuku.COLUMN_5, kodeBuku);
-                values.put(DBHelperBuku.COLUMN_6, judulBuku);
-                values.put(DBHelperBuku.COLUMN_7, penulisBuku);
-                values.put(DBHelperBuku.COLUMN_8, penerbitBuku);
-                values.put(DBHelperBuku.COLUMN_9, tahunTerbit);
-                values.put(DBHelperBuku.COLUMN_10, jumlahHalaman);
-                values.put(DBHelperBuku.COLUMN_11, rakBuku);
-                values.put(DBHelperBuku.COLUMN_12, kategoriBuku);
-                values.put(DBHelperBuku.COLUMN_13, tglMasukBuku);
+                values.put(DBHelper.COLUMN_2, kodeBuku);
+                values.put(DBHelper.COLUMN_3, judulBuku);
+                values.put(DBHelper.COLUMN_4, penulisBuku);
+                values.put(DBHelper.COLUMN_5, penerbitBuku);
+                values.put(DBHelper.COLUMN_6, tahunTerbit);
+                values.put(DBHelper.COLUMN_7, jumlahHalaman);
+                values.put(DBHelper.COLUMN_8, rakBuku);
+                values.put(DBHelper.COLUMN_9, kategoriBuku);
+                values.put(DBHelper.COLUMN_10, tglMasukBuku);
 
                 if (kodeBuku.equals("") || judulBuku.equals("") ||
                         penulisBuku.equals("") || penerbitBuku.equals("") ||
@@ -155,7 +156,7 @@ public class EditBuku extends AppCompatActivity {
                 ){
                     Toast.makeText(EditBuku.this, "Data Buku Tidak Boleh Kosong !", Toast.LENGTH_SHORT).show();
                 }else{
-                    helper.updateData(values, id);
+                    helper.updateDataBuku(values, id);
                     Toast.makeText(EditBuku.this, "Data Buku Berhasil Di Edit !", Toast.LENGTH_SHORT).show();
                     finish();
                 }
@@ -168,7 +169,7 @@ public class EditBuku extends AppCompatActivity {
                 builder.setPositiveButton("Hapus", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        helper.deleteData(id);
+                        helper.deleteDataBuku(id);
                         Toast.makeText(EditBuku.this, "Data Buku Berhasil Di Hapus !", Toast.LENGTH_SHORT).show();
                         finish();
                     }

@@ -13,8 +13,6 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.e.simampuscrud.Buku.AddBuku;
-import com.e.simampuscrud.Buku.DBHelperBuku;
 import com.e.simampuscrud.DBHelper;
 import com.e.simampuscrud.R;
 

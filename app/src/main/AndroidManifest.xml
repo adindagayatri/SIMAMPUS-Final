@@ -10,19 +10,24 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".About"></activity>
-        <activity android:name=".Peminjaman.EditPeminjaman" />
-        <activity android:name=".Peminjaman.AddPeminjaman" />
+        <activity android:name=".Peminjaman.EditPeminjaman">
+        </activity>
+        <activity android:name=".Peminjaman.AddPeminjaman">
+        </activity>
         <activity
             android:name=".Peminjaman.Peminjaman"
             android:label="@string/title_activity_peminjaman"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
         <activity
             android:name=".Member.Member"
             android:label="Member"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
         <activity android:name=".Member.EditMember" />
         <activity android:name=".Member.AddMember" />
-        <activity android:name=".Buku.EditBuku" />
+        <activity android:name=".Buku.EditBuku"></activity>
         <activity android:name=".Buku.AddBuku" />
         <activity
             android:name=".Buku.Buku"
@@ -30,16 +35,18 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".LoginRegister.LoginAdmin"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
         <activity android:name=".LoginRegister.RegisterAdmin" />
         <activity android:name=".MainActivity">
+        </activity>
+        <activity android:name=".SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SplashScreen"></activity>
     </application>
 
 </manifest>

@@ -158,4 +158,6 @@ public class DBHelper extends SQLiteOpenHelper {
         db.delete(NamaTabel3, COLOUMN_ID + "=" + id, null);
     }
 
+    // GET MEMBER DAN GET BUKU
+
 }

@@ -1,9 +1,5 @@
 package com.e.simampuscrud.Buku;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -17,13 +13,18 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
+import com.e.simampuscrud.DBHelper;
 import com.e.simampuscrud.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class Buku extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     ListView listView;
-    DBHelperBuku helper;
+    DBHelper helper;
     LayoutInflater inflater;
     View dialogView;
     TextView TvKode, TvJudul, TvPenulis, TvPenerbit, TvTahunTerbit, TvJmlHalaman, TvRakBuku, TvTglMasukBuku, TvKategori;
@@ -43,7 +44,7 @@ public class Buku extends AppCompatActivity implements AdapterView.OnItemClickLi
             }
         });
 
-        helper = new DBHelperBuku(this);
+        helper = new DBHelper(this);
         listView = (ListView)findViewById(R.id.list_buku);
         listView.setOnItemClickListener(this);
     }
@@ -71,7 +72,7 @@ public class Buku extends AppCompatActivity implements AdapterView.OnItemClickLi
     }
 
     public void setListView(){
-        Cursor cursor = helper.allData();
+        Cursor cursor = helper.allDataBuku();
         CursorAdapterBuku customCursorAdapter = new CursorAdapterBuku(this, cursor, 1);
         listView.setAdapter(customCursorAdapter);
     }
@@ -80,7 +81,7 @@ public class Buku extends AppCompatActivity implements AdapterView.OnItemClickLi
     public void onItemClick(AdapterView<?> parent, View view, int i, long x) {
         TextView getId = (TextView)view.findViewById(R.id.listID);
         final long id = Long.parseLong(getId.getText().toString());
-        final Cursor cur = helper.oneData(id);
+        final Cursor cur = helper.oneDataBuku(id);
         cur.moveToFirst();
 
         final AlertDialog.Builder builder = new AlertDialog.Builder(Buku.this);
@@ -109,15 +110,15 @@ public class Buku extends AppCompatActivity implements AdapterView.OnItemClickLi
                         TvTglMasukBuku = (TextView)dialogView.findViewById(R.id.tv_TglMasukBuku);
                         TvKategori = (TextView)dialogView.findViewById(R.id.tv_Kategori);
 
-                        TvKode.setText("Kode Buku                   : " + cur.getString(cur.getColumnIndex(DBHelperBuku.COLUMN_5)));
-                        TvJudul.setText("Judul Buku                  : " + cur.getString(cur.getColumnIndex(DBHelperBuku.COLUMN_6)));
-                        TvPenulis.setText("Penulis                         : " + cur.getString(cur.getColumnIndex(DBHelperBuku.COLUMN_7)));
-                        TvPenerbit.setText("Penerbit                       : " + cur.getString(cur.getColumnIndex(DBHelperBuku.COLUMN_8)));
-                        TvTahunTerbit.setText("Tahun Terbit                : " + cur.getString(cur.getColumnIndex(DBHelperBuku.COLUMN_9)));
-                        TvJmlHalaman.setText("Jumlah Halaman        : " + cur.getString(cur.getColumnIndex(DBHelperBuku.COLUMN_10)));
-                        TvRakBuku.setText("Rak Buku                      : " + cur.getString(cur.getColumnIndex(DBHelperBuku.COLUMN_11)));
-                        TvKategori.setText("Kategori                        : " + cur.getString(cur.getColumnIndex(DBHelperBuku.COLUMN_12)));
-                        TvTglMasukBuku.setText("Tanggal Masuk Buku  : " + cur.getString(cur.getColumnIndex(DBHelperBuku.COLUMN_13)));
+                        TvKode.setText("Kode Buku                   : " + cur.getString(cur.getColumnIndex(DBHelper.COLUMN_2)));
+                        TvJudul.setText("Judul Buku                  : " + cur.getString(cur.getColumnIndex(DBHelper.COLUMN_3)));
+                        TvPenulis.setText("Penulis                         : " + cur.getString(cur.getColumnIndex(DBHelper.COLUMN_4)));
+                        TvPenerbit.setText("Penerbit                       : " + cur.getString(cur.getColumnIndex(DBHelper.COLUMN_5)));
+                        TvTahunTerbit.setText("Tahun Terbit                : " + cur.getString(cur.getColumnIndex(DBHelper.COLUMN_6)));
+                        TvJmlHalaman.setText("Jumlah Halaman        : " + cur.getString(cur.getColumnIndex(DBHelper.COLUMN_7)));
+                        TvRakBuku.setText("Rak Buku                      : " + cur.getString(cur.getColumnIndex(DBHelper.COLUMN_8)));
+                        TvKategori.setText("Kategori                        : " + cur.getString(cur.getColumnIndex(DBHelper.COLUMN_9)));
+                        TvTglMasukBuku.setText("Tanggal Masuk Buku  : " + cur.getString(cur.getColumnIndex(DBHelper.COLUMN_10)));
 
                         viewData.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override
@@ -130,7 +131,7 @@ public class Buku extends AppCompatActivity implements AdapterView.OnItemClickLi
                 switch (which){
                     case 1:
                         Intent iddata = new Intent(Buku.this, EditBuku.class);
-                        iddata.putExtra(DBHelperBuku.COLUMN_4, id);
+                        iddata.putExtra(DBHelper.COLUMN_1, id);
                         startActivity(iddata);
                 }
                 switch (which){
@@ -141,7 +142,7 @@ public class Buku extends AppCompatActivity implements AdapterView.OnItemClickLi
                         builder1.setPositiveButton("Hapus", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                helper.deleteData(id);
+                                helper.deleteDataBuku(id);
                                 Toast.makeText(Buku.this, "Data Buku Berhasil Di Hapus !", Toast.LENGTH_SHORT).show();
                                 setListView();
                             }

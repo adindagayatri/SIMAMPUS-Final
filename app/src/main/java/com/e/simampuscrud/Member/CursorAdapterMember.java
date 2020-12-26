@@ -10,8 +10,6 @@ import android.view.ViewGroup;
 import android.widget.CursorAdapter;
 import android.widget.TextView;
 
-import com.e.simampuscrud.Buku.CursorAdapterBuku;
-import com.e.simampuscrud.Buku.DBHelperBuku;
 import com.e.simampuscrud.DBHelper;
 import com.e.simampuscrud.R;
 

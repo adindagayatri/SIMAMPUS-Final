@@ -25,7 +25,6 @@
     </string-array>
     <string name="title_activity_pinjam">Pinjam</string>
     <string name="AboutApp">Sistem Informasi Manajemen Perpustakaan (SI MAMPUS) adalah sebuah sistem pencatatan berbasis Android yang memudahkan operator perpustakaan dalam melakukan pencatatan peminjaman buku, pencatatan buku masuk, dan pencatatan anggota perpustakaan</string>
-    <string name="pengembang">Dikembangkan Oleh\n01. Sheila Shevira\n02. Adinda Gayatri \n03. Candra Puspita</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
